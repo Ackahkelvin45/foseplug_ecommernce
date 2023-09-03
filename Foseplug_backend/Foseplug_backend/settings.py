@@ -48,6 +48,9 @@ INSTALLED_APPS = [
       'django_filters',
       'cart',
       'wishlist',
+      'review',
+      'channels',
+      
 
 ]
 
@@ -126,6 +129,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Foseplug_backend.urls'
@@ -238,5 +242,6 @@ EMAIL_PORT='587'
 EMAIL_HOST_USER='fooseplug835@gmail.com'
 EMAIL_HOST_PASSWORD='hknpznjtafeibbzo'
 EMAIL_USE_TLS=True
+
 
 

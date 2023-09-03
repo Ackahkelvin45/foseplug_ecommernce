@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import  Listing,Image,Category,Store,Subcategory
 from django.utils import timezone
 from humanize import naturaltime
+from authentication.serializers import UserSerializer
+from review.serializers import ReviewSerializer
 
 
 
@@ -61,6 +63,7 @@ class ListingSerializer(serializers.ModelSerializer):
     
 
 class StoreSerializer(serializers.ModelSerializer):
+    owner=UserSerializer()
     class Meta:
         model=Store
         fields="__all__"
@@ -72,6 +75,7 @@ class ViewListingSerializer(serializers.ModelSerializer):
     category=CatergorySerializer()
     subcategory=SubCategorySerializer()
     store=StoreSerializer()
+    review=ReviewSerializer(many=True, read_only=True)
     
     class Meta:
         model=Listing
@@ -86,3 +90,6 @@ class ViewListingSerializer(serializers.ModelSerializer):
 
         return representation
   
+
+
+

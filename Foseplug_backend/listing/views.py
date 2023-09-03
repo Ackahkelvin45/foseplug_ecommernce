@@ -6,7 +6,9 @@ from rest_framework.decorators import api_view,permission_classes,renderer_class
 from rest_framework.permissions import IsAuthenticated
 from .filters import ListingFilter
 from rest_framework import generics
+from rest_framework.generics import RetrieveAPIView
 import time
+
 
 
 
@@ -23,14 +25,11 @@ class ListingApiView(generics.ListAPIView):
 
 
 
-@api_view(['GET'])
-def getListingdetail(request,pk):
-  item=Listing.objects.get(pk=pk)
-  serializer=ViewListingSerializer(data=item)
-  return Response({
-    "listing":serializer.data,
-  })
 
+class ListingDetailView(RetrieveAPIView):
+    queryset = Listing.objects.all()
+    serializer_class = ViewListingSerializer
+    lookup_field = 'pk'
 
 
 @api_view(['POST','GET'])
@@ -91,4 +90,30 @@ def getCategories(request):
 
 
 
+
+
+
+@api_view(['GET'])
+def getTotalAds(request,pk):
+    store=Store.objects.get(id=pk)
+    listing=Listing.objects.filter(store_id=pk).count()
+    return Response(
+        {
+            "count":listing
+        }
+    )
+
+
+
+
+@api_view(['GET'])
+def getRecommendedAds(request,pk):
+    store=Store.objects.get(id=pk)
+    listing=Listing.objects.filter(store_id=pk)
+    serializer=ViewListingSerializer(listing,many=True)
+    return Response(
+        {
+            "recommendedads":serializer.data
+        }
+    )
 

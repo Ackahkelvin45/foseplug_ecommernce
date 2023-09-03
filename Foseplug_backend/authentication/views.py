@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework  import status
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer,UserSerializer
 from django.core.mail import EmailMessage
 from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import IsAuthenticated
+from listing.models import Store,Listing
+
 
 
 
@@ -59,4 +62,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUser(request):
+    user=request.user
+    serializer=UserSerializer(user)
+    stores=Store.objects.filter(owner_id=user.id)
     
+    ads=0
+    for store in stores:
+        ads=ads+Listing.objects.filter(store_id=store.id).count()
+        
+
+    return Response({
+        "user":serializer.data,
+        'total_stores':Store.objects.filter(owner_id=user.id).count(),
+        "total_ads":ads,
+    })
