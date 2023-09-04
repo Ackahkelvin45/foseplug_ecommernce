@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+      'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +50,9 @@ INSTALLED_APPS = [
       'cart',
       'wishlist',
       'review',
-      'channels',
+    
+      'chat',
+      'Foseplug_backend'
       
 
 ]
@@ -177,6 +180,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Foseplug_backend.wsgi.application'
 
 
+
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -245,3 +250,10 @@ EMAIL_USE_TLS=True
 
 
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+} 
+
+ASGI_APPLICATION = 'Foseplug_backend.routing.application'
