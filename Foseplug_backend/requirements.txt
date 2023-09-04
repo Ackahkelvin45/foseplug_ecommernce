@@ -43,8 +43,6 @@ docxtpl==0.16.7
 drf-yasg==1.21.4
 dynaconf==3.1.12
 filelock==3.12.2
-Flask==2.3.2
-Flask-SQLAlchemy==3.0.5
 frozenlist==1.3.3
 geographiclib==2.0
 geopy==2.3.0
@@ -62,7 +60,6 @@ itypes==1.2.0
 Jinja2==3.1.2
 jinja2-time==0.2.0
 jmespath==1.0.1
-knox==0.1.14
 loguru==0.7.0
 lxml==4.9.2
 MarkupSafe==2.1.2
@@ -81,15 +78,12 @@ pycparser==2.21
 pyhcl==0.4.4
 PyJWT==2.6.0
 pyOpenSSL==23.2.0
-pyPdf==1.6
-PyPDF2==2.12.0
 pypiwin32==223
 pypng==0.20220715.0
 python-dateutil==2.8.2
 python-docx==0.8.11
 python-slugify==8.0.1
 pyttsx3==2.90
-pytube==12.1.2
 pytz==2022.7.1
 pywin32==306
 PyYAML==6.0
